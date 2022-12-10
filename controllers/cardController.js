@@ -8,13 +8,23 @@ const index = (req,res) => {
 }
 
 const create = (req,res) => {
-    console.log(req.body)
-    Card.create(req.body)
-    .then((card)=>{
-        console.log(card)
-        Card.find({}, (e, cards)=>{
-            res.json(cards)
-        })
+    Card.create(req.body, (err,u) =>{
+        if(err){
+            res.status(400).json(err)
+            return
+        }
+        res.json(u)
+    })
+    
+}
+
+const show = (req, res) => {
+    Card.findById(req.params.id, (err,u) => {
+        if(err){
+            res.status(400).json(er)
+            return
+        }
+        res.json(u)
     })
 }
 
@@ -25,7 +35,7 @@ const deleteCard = (req,res) => {
             return
         }
         Card.find({}, (e, cards)=> {
-            res,json(cards)
+            res.json(cards)
         })
     })
 }
@@ -45,6 +55,7 @@ const update = (req,res) => {
 module.exports = {
     index,
     create,
+    show,
     deleteCard,
     update
 }
