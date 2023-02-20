@@ -8,12 +8,20 @@ const index = (req,res) => {
 }
 
 const create = (req,res) => {
+    //  const { name } = req.body;
+    // Card.create({ name })
+    //     .then(response => res.json(response))
+    //     .catch(err => res.json(err));
+    //     console.log(name)
+
+
     Card.create(req.body, (err,u) =>{
         if(err){
             res.status(400).json(err)
             return
         }
         res.json(u)
+        console.log(req.body)
     })
     
 }
@@ -21,7 +29,7 @@ const create = (req,res) => {
 const show = (req, res) => {
     Card.findById(req.params.id, (err,u) => {
         if(err){
-            res.status(400).json(er)
+            res.status(400).json(err)
             return
         }
         res.json(u)
